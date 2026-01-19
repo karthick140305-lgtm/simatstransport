@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <title>Mobile Bus Pass</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -39,15 +37,15 @@
 
     .img-cont1 {
       width: 100%;
-      height: 250px;
+      height: 310px;
       overflow: hidden;
     }
 
     .img-cont1 .photo {
       width: 300px;
-      height: 260px;
+      height: 300px;
       object-fit: cover;
-      opacity: 0.9;
+      opacity: 1;
     }
 
     .img-cont2 {
@@ -152,7 +150,6 @@
     }
   </style>
 </head>
-
 <body>
 
   <div class="header" id="datetime">Loading...</div>
@@ -160,23 +157,23 @@
 
   <div class="image-wrapper">
     <div class="img-cont1">
-      <img src="myimag.jpeg" class="photo">
+      <img src="myimag.jpeg" alt="Profile Image" class="photo">
     </div>
     <div class="img-cont2">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=192321138" class="qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=192321138" class="qr" alt="QR Code">
     </div>
   </div>
 
-  <!-- ✅ Dynamic Username -->
-  <div class="info" id="username">Loading...</div>
-
+  <div class="info">M.Ganeshkarthick</div>
   <div class="reg">192321138</div>
   <div class="area">VALLUVARKOTTAM 16A</div>
 
-  <!-- Top Footer -->
+  <!-- Top Blue Footer -->
   <div class="footer-top">
+    <!-- Left Icon (User with hair) -->
     <i class="fas fa-user footer-icon-top"></i>
 
+    <!-- Merged Center Icon: Home + Shield -->
     <div class="center-icon-wrapper">
       <div class="icon-merged">
         <i class="fas fa-home"></i>
@@ -184,10 +181,11 @@
       </div>
     </div>
 
+    <!-- Right Icon (Ringing Bell) -->
     <i class="fas fa-bell footer-icon-top"></i>
   </div>
 
-  <!-- Bottom Footer -->
+  <!-- Bottom White Footer -->
   <div class="footer-bottom">
     <i class="fas fa-arrow-left footer-icon-bottom"></i>
     <i class="fas fa-arrow-right footer-icon-bottom"></i>
@@ -196,31 +194,23 @@
     <i class="fas fa-user-circle footer-icon-bottom"></i>
   </div>
 
-  <!-- Date & Time -->
+  <!-- DateTime Script -->
   <script>
     function updateDateTime() {
       const now = new Date();
       const day = String(now.getDate()).padStart(2, '0');
-      const monthNames = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+      const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
       const month = monthNames[now.getMonth()];
       const year = now.getFullYear();
       const hours = String(now.getHours()).padStart(2, '0');
       const minutes = String(now.getMinutes()).padStart(2, '0');
       const seconds = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById("datetime").innerText =
-        `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+      const formatted = `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+      document.getElementById('datetime').innerText = formatted;
     }
+
     setInterval(updateDateTime, 1000);
     updateDateTime();
-  </script>
-
-  <!-- ✅ URL-based Username Script -->
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const name = params.get("name");
-
-    document.getElementById("username").innerText =
-      name ? decodeURIComponent(name) : "simatstransport.saveetha.com/viewpass.php";
   </script>
 
 </body>
