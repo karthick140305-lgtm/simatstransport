@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mobile Bus Pass</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: white;
+      text-align: center;
+    }
+
+    .header {
+      background-color: #00b000;
+      color: white;
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    .status {
+      background-color: #00b000;
+      color: white;
+      padding: 4px;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .image-wrapper {
+      position: relative;
+      width: 290px;
+      margin: 20px auto;
+    }
+
+    .img-cont1 {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .img-cont1 .photo {
+      width: 300px;
+      height: 260px;
+      object-fit: cover;
+      opacity: 0.9;
+    }
+
+    .img-cont2 {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-65%);
+    }
+
+    .img-cont2 .qr {
+      width: 70px;
+      height: 70px;
+    }
+
+    .info {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 35px;
+    }
+
+    .reg {
+      font-size: 16px;
+      margin-top: 4px;
+      margin-bottom: 30px;
+      font-weight: bold;
+    }
+
+    .area {
+      background-color: #00b000;
+      color: white;
+      padding: 7px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    /* Top Blue Footer */
+    .footer-top {
+      background-color: #2196f3;
+      position: fixed;
+      bottom: 60px;
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .footer-icon-top {
+      color: white;
+      font-size: 22px;
+    }
+
+    .center-icon-wrapper {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #2196f3;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      border: 3px solid white;
+      z-index: 15;
+    }
+
+    .icon-merged {
+      position: relative;
+      font-size: 22px;
+      color: white;
+    }
+
+    .icon-merged .fa-shield {
+      position: absolute;
+      bottom: -4px;
+      right: -8px;
+      font-size: 13px;
+    }
+
+    /* Bottom White Footer */
+    .footer-bottom {
+      background-color: white;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-top: 1px solid #ccc;
+      z-index: 5;
+    }
+
+    .footer-icon-bottom {
+      color: grey;
+      font-size: 20px;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header" id="datetime">Loading...</div>
+  <div class="status">VALID</div>
+
+  <div class="image-wrapper">
+    <div class="img-cont1">
+      <img src="myimag.jpeg" class="photo">
+    </div>
+    <div class="img-cont2">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=192321138" class="qr">
+    </div>
+  </div>
+
+  <!-- ✅ Dynamic Username -->
+  <div class="info" id="username">Loading...</div>
+
+  <div class="reg">192321138</div>
+  <div class="area">VALLUVARKOTTAM 16A</div>
+
+  <!-- Top Footer -->
+  <div class="footer-top">
+    <i class="fas fa-user footer-icon-top"></i>
+
+    <div class="center-icon-wrapper">
+      <div class="icon-merged">
+        <i class="fas fa-home"></i>
+        <i class="fas fa-shield"></i>
+      </div>
+    </div>
+
+    <i class="fas fa-bell footer-icon-top"></i>
+  </div>
+
+  <!-- Bottom Footer -->
+  <div class="footer-bottom">
+    <i class="fas fa-arrow-left footer-icon-bottom"></i>
+    <i class="fas fa-arrow-right footer-icon-bottom"></i>
+    <i class="fas fa-home footer-icon-bottom"></i>
+    <i class="fas fa-ellipsis-h footer-icon-bottom"></i>
+    <i class="fas fa-user-circle footer-icon-bottom"></i>
+  </div>
+
+  <!-- Date & Time -->
+  <script>
+    function updateDateTime() {
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, '0');
+      const monthNames = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+      const month = monthNames[now.getMonth()];
+      const year = now.getFullYear();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById("datetime").innerText =
+        `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+  </script>
+
+  <!-- ✅ URL-based Username Script -->
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+
+    document.getElementById("username").innerText =
+      name ? decodeURIComponent(name) : "simatstransport.saveetha.com/viewpass.php";
+  </script>
+
+</body>
+</html>
